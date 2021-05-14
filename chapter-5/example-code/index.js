@@ -101,6 +101,75 @@ let rtlScripts = scripts.filter(s => s.direction == "rtl");
 // SUMMARIZING WITH REDUCE
 
 
+function reduce(array, combine, start) {
+    let current = start;
+    for (let element of array) {
+        current = combine(current, element);
+    }
+    return current;
+}
+
+/*console.log(reduce([1, 2, 3, 4], (a, b) => a + b, 0));*/
+/*console.log([1, 2, 3, 4].reduce((a, b) => a - b));*/
+
+
+/////////////////////////////////////////////////////////////////////////////////
+
+
+function characterCount(script) {
+    return script.ranges.reduce((count, [from, to]) => {
+        return count + (to - from);
+    }, 0);
+}
+
+/*console.log(scripts.reduce((a, b) => {
+    return characterCount(a) < characterCount(b) ? b : a;
+}));*/
+
+
+/////////////////////////////////////////////////////////////////////////////////
+// COMPOSABILITY
+
+let biggest = null;
+for (let script of scripts) {
+    if (biggest == null || 
+        characterCount(biggest) < characterCount(script)) {
+
+        biggest = script;
+    }
+}
+
+//console.log(biggest);
+
+
+/////////////////////////////////////////////////////////////////////////////////
+
+
+function average(array) {
+    return array.reduce((a, b) => a + b) / array.length;
+}
+
+/*console.log(Math.round(average(
+    scripts.filter(s => s.living).map(s => s.year))));*/
+
+/*console.log(Math.round(average(
+    scripts.filter(s => !s.living).map(s => s.year))));*/
+
+    
+let total = 0, count = 0;
+for (let script of scripts) {
+    if (script.living) {
+        total += script.year;
+        count++;
+    }
+}
+
+/*console.log(Math.round(total / count));*/
+
+
+/////////////////////////////////////////////////////////////////////////////////
+// STRINGS AND CHARACTER CODES
+
 
 
 
