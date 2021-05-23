@@ -1,3 +1,6 @@
+// A VECTOR TYPE
+
+
 // OMA RATKAISU
 
 class Vector {
